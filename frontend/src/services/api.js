@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'http://localhost:5001/api';
 
 export const getMapData = async (topic, skillLevel) => {
     try {
@@ -30,12 +30,12 @@ export const getRecommendations = async (topic) => {
     }
 };
 
-export const getPracticeData = async (node) => {
+export const getPracticeData = async (topic, node_label, skill_level, key_concepts) => {
     try {
         const response = await fetch(`${API_BASE}/generate-practice`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ node })
+            body: JSON.stringify({ topic, node_label, skill_level, key_concepts })
         });
         return await response.json();
     } catch (error) {
@@ -44,12 +44,12 @@ export const getPracticeData = async (node) => {
     }
 };
 
-export const getResourceData = async (node) => {
+export const getResourceData = async (topic, node_label, skill_level) => {
     try {
         const response = await fetch(`${API_BASE}/generate-resources`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ node })
+            body: JSON.stringify({ topic, node_label, skill_level })
         });
         return await response.json();
     } catch (error) {
